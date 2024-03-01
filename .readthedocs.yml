@@ -9,7 +9,7 @@ build:
       - pip install poetry
       - poetry config virtualenvs.create false
       - pip freeze
-      - poetry install --only docs
+      - poetry install --only rtd
 
 sphinx:
   configuration: docs/conf.py
