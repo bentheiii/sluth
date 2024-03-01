@@ -12,6 +12,7 @@ in a github repository.
     extensions.append('sphinx.ext.linkcode')
     import os
     import subprocess
+    from importlib.util import find_spec
 
     from sluth import NodeWalk
 
@@ -26,13 +27,15 @@ in a github repository.
             pass
 
     base_url = "https://github.com/bentheiii/sluth"  # The base url of the repository
+    root_dir = find_spec("sluth").submodule_search_locations[0]
 
     def linkcode_resolve(domain, info):
         if domain != "py":
             return None
         try:
-            fn = f"{project}/{info['module']}.py"
-            walk = NodeWalk.from_file(fn)
+            blob = f"{project}/{info['module']}.py"
+            file = f"{root_dir}/{info['module']}.py"
+            walk = NodeWalk.from_file(file)
             parts = info["fullname"].split(".")
             for part in parts:
                 try:
@@ -43,5 +46,5 @@ in a github repository.
             print(f"error getting link code {info}")
             print_exc()
             raise
-        path = f"{fn}#L{walk.lineno}-L{walk.end_lineno}"
+        path = f"{blob}#L{walk.lineno}-L{walk.end_lineno}"
         return f"{base_url}/blob/{release}/{path}"
