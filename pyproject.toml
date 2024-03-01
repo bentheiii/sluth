@@ -20,11 +20,8 @@ mypy = {version="*", python=">=3.8"}
 ruff = {version="*", python=">=3.8"} 
 coverage = "^7.4.3"
 
-[tool.poetry.group.rtd]
+[tool.poetry.group.docs]
 optional = true
-
-[tool.poetry.group.rtd.dependencies]
-furo = "*"
 
 [tool.poetry.group.docs.dependencies]
 sphinx = "*"

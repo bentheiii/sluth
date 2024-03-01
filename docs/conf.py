@@ -37,6 +37,7 @@ autosectionlabel_prefix_document = True
 extensions.append('sphinx.ext.linkcode')
 import os
 import subprocess
+from importlib.util import find_spec
 
 from sluth import NodeWalk
 
@@ -51,12 +52,13 @@ else:
         pass
 
 base_url = "https://github.com/bentheiii/sluth"  # The base url of the repository
+root_dir = find_spec("sluth").submodule_search_locations[0]
 
 def linkcode_resolve(domain, info):
     if domain != "py":
         return None
     try:
-        fn = f"{project}/{info['module']}.py"
+        fn = f"{root_dir}/{info['module']}.py"
         walk = NodeWalk.from_file(fn)
         parts = info["fullname"].split(".")
         for part in parts:
