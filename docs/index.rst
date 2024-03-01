@@ -1,4 +1,4 @@
-Welcome to envolved's documentation!
+Welcome to Sluth's documentation!
 ======================================
 .. toctree::
     :maxdepth: 2
