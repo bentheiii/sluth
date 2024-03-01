@@ -71,7 +71,7 @@ def linkcode_resolve(domain, info):
         print(f"error getting link code {info}")
         print_exc()
         raise
-    path = f"{project}#L{walk.lineno}-L{walk.end_lineno}"
+    path = f"{blob}#L{walk.lineno}-L{walk.end_lineno}"
     return f"{base_url}/blob/{release}/{path}"
 
 
