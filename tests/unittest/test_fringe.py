@@ -159,3 +159,21 @@ def test_fringe_find_awithvar_tup(fringe_walker):
     assert needle.col_offset == 0
     assert needle.end_lineno == 53
     assert needle.end_col_offset == 63
+
+
+def test_fringe_get_last(fringe_walker):
+    needle = fringe_walker.get_last("Mult")
+
+    assert needle.lineno == 68
+    assert needle.col_offset == 0
+    assert needle.end_lineno == 73
+    assert needle.end_col_offset == 16
+
+
+def test_fringe_get_last_nested(fringe_walker):
+    needle = fringe_walker.get_last("Mult.foo")
+
+    assert needle.lineno == 72
+    assert needle.col_offset == 4
+    assert needle.end_lineno == 73
+    assert needle.end_col_offset == 16

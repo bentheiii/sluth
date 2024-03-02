@@ -25,6 +25,8 @@ def test_parsers_find_method(walker_parsers):
     assert needle.end_lineno == 137
     assert needle.end_col_offset == 30
 
+    assert needle == walker_parsers["BoolParser.__init__"]
+
 
 def test_parsers_find_glob_var(walker_parsers):
     needle = walker_parsers["no_fallback"]

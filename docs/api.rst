@@ -28,8 +28,18 @@ API Reference
 
         Returns a :class:`NodeWalk` object for the declaration of the given name.
 
+        :param name: The name of the declared object. Can also be a dotted name.
+
         :raises KeyError: If the name is not declared in the node.
         :raises ValueError: If the node declares multiple names with the given name.
+
+    .. method:: get_last(name: str)->NodeWalk
+
+        Returns a :class:`NodeWalk` object for the last declaration of the given name.
+
+        :param name: The name of the declared object. Can also be a dotted name.
+
+        :raises KeyError: If the name is not declared in the node.
 
     .. method:: get_many(name: str)->collections.abc.Sequence[NodeWalk]
 
