@@ -57,3 +57,17 @@ async for a[i] in range(10):
     print(i)
 
 from gold import *
+
+class Mult:
+    def foo(self):
+        return 1
+    
+    def foo(self):
+        return 2
+    
+class Mult:
+    def foo(self):
+        return 1
+    
+    def foo(self):
+        return 2

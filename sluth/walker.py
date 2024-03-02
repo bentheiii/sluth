@@ -155,7 +155,7 @@ class NodeWalk:
     def _get_children(self) -> dict[str, list[NodeWalk]]:
         visitor = Visitor(self.node)
         visitor.visit(self.node)
-        return {k: [NodeWalk(n) for n in v] for k, v in visitor.children.items()}
+        return {k: [type(self)(n) for n in v] for k, v in visitor.children.items()}
 
     def children(self) -> Mapping[str, Sequence[NodeWalk]]:
         if self._children is None:
@@ -163,12 +163,28 @@ class NodeWalk:
         return self._children
 
     def __getitem__(self, name: str) -> NodeWalk:
+        name, _, suffix = name.partition(".")
+
         candidates = self.children().get(name, ())
         if not candidates:
             raise KeyError(f"No nodes with the name {name}, found names: {sorted(self.children().keys())}")
         if len(candidates) > 1:
             raise ValueError(f"Multiple nodes with the name {name}")
-        return candidates[0]
+        ret = candidates[0]
+        if suffix:
+            return ret[suffix]
+        return ret
+
+    def get_last(self, name: str) -> NodeWalk:
+        name, _, suffix = name.partition(".")
+
+        candidates = self.children().get(name, ())
+        if not candidates:
+            raise KeyError(f"No nodes with the name {name}, found names: {sorted(self.children().keys())}")
+        ret = candidates[-1]
+        if suffix:
+            return ret.get_last(suffix)
+        return ret
 
     def get_many(self, name: str) -> Sequence[NodeWalk]:
         return self.children().get(name, ())
