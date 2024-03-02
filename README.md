@@ -1,5 +1,8 @@
 # Sluth- a python library to find python definitions in code without running it
 
+[documentation](https://sluth.readthedocs.io/en/latest/)
+[pypi](https://pypi.org/project/sluth/)
+
 Sluth is a simple utility to find definitions in python code without running it. It is useful for building documentation, finding dependencies, and other tasks that require knowing what a python file does without running it.
 
 ```python
