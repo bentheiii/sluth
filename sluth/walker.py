@@ -190,7 +190,7 @@ class NodeWalk:
         return self.children().get(name, ())
 
     def _start_node(self) -> NodeWithOffset:
-        if (decorators := getattr(self.node, "decorator_list", ())) and decorators:
+        if decorators := getattr(self.node, "decorator_list", ()):
             return NodeWithOffset(decorators[0], col_offset_offset=-1)
         return NodeWithOffset(self.node)
 
